@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistrationRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -82,7 +83,7 @@ class UserController extends Controller
     }
 
 
-    public function update(RegistrationRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
         try{
             $this->authorize('update', auth()->user());
@@ -95,10 +96,10 @@ class UserController extends Controller
 
         $user->roles()->detach();
 
-        if($data['password'] !== null){
-            $postData = collect($data)->except('email');
+        if($data['password'] === null){
+            $postData = collect($data)->except('password');
         }else{
-            $postData = collect($data)->except(['email', 'password']);
+            $postData = collect($data);
         }
 
         if(!$user->update($postData->toArray())){
