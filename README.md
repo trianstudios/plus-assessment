@@ -47,4 +47,9 @@ _{This is a detailed description of your application. Give as much detail as nee
     MAIL_FROM_ADDRESS=null
     ```
 * finally run ```php artisan migrate:fresh --seed```. This command is used just in case your database already has conflicting data.
+* Test User Credentials:
+    ```
+    email: admin@test.com
+    password: password
+    ```
 * enjoy!!
